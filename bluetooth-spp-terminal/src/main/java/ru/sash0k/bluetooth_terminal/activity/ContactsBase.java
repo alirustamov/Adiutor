@@ -33,6 +33,8 @@ public class ContactsBase extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_base);
         activity = this;
+        phoneModels = new ArrayList<PhoneModel>();
+
         listView = (ListView) findViewById(R.id.listJe);
         addContact = (Button) findViewById(R.id.addContact);
         addContact.setOnClickListener(new View.OnClickListener() {
@@ -59,10 +61,10 @@ public class ContactsBase extends Activity {
                 phoneModel.setPhone(obj.get("phone").toString());
                 phoneModels.add(phoneModel);
             }
+            listView.setAdapter(new ContactListAdapter(getApplicationContext(), phoneModels));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(new ContactListAdapter(getApplicationContext(), phoneModels));
     }
 
     @Override
