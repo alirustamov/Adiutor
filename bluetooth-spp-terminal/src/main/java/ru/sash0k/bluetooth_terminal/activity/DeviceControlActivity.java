@@ -23,7 +23,6 @@ import com.actionbarsherlock.view.MenuItem;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import ru.sash0k.bluetooth_terminal.DeviceData;
 import ru.sash0k.bluetooth_terminal.R;
@@ -193,7 +192,7 @@ public final class DeviceControlActivity extends BaseActivity {
 
             case R.id.menu_contacts:
                 Intent contactsActivity = new Intent();
-                contactsActivity.setClass(this, Contacts.class);
+                contactsActivity.setClass(this, ContactsBase.class);
                 startActivity(contactsActivity);
 
                 return true;

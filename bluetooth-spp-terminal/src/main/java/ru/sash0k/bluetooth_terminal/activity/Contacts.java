@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -14,11 +16,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,11 +41,35 @@ public class Contacts extends Activity implements AbsListView.OnScrollListener {
     ArrayList<PhoneModel> phoneModels;
     ArrayList<PhoneModel> phoneModelsSection;
     LinearLayout sideIndex;
+    private String PREFS_NAME = "ALI_DATA";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
         listView = (ListView) findViewById(R.id.listView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PhoneModel t = (PhoneModel) parent.getItemAtPosition(position);
+                SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                String contactsDB = prefs.getString("contacts", "[]");
+                SharedPreferences.Editor ed = prefs.edit();
+                try {
+                    JSONArray array = new JSONArray(contactsDB);
+                    JSONObject obj = new JSONObject();
+                    obj.put("name", t.getName());
+                    obj.put("phone", t.getPhone());
+                    array.put(obj);
+                    ed.putString("contacts",array.toString());
+                    ed.commit();
+                    Toast.makeText(getApplicationContext(), "Добавлено", Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
         phoneModels = new ArrayList<PhoneModel>();
         new getContactTask().execute((Void[])null);
     }
