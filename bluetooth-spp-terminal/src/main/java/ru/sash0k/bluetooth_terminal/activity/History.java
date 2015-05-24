@@ -25,13 +25,13 @@ public class History extends Activity {
         setContentView(R.layout.activity_history);
 
         lv = (ListView)findViewById(R.id.listView2);
-        String[] items = new String[] {"20.05.15 15:33", "22.05.15 10:25"};
+        String[] items = new String[] {"20.05.15 15:33 - Confirmed", "22.05.15 10:25 - Confirmed"};
 
         ArrayList<String> itemList = new ArrayList<String>();
         itemList.addAll(Arrays.asList(items));
 
         listAdapter = new ArrayAdapter<String> (this, R.layout.history_row, itemList);
-        listAdapter.add("23.05.15 13:03");
+        listAdapter.add("23.05.15 13:03 - Cancelled");
         lv.setAdapter(listAdapter);
 
     }
