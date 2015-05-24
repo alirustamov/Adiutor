@@ -4,16 +4,36 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import ru.sash0k.bluetooth_terminal.R;
 
 
 public class History extends Activity {
 
+    private ListView lv;
+    private ArrayAdapter<String> listAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        lv = (ListView)findViewById(R.id.listView2);
+        String[] items = new String[] {"20.05.15 15:33", "22.05.15 10:25"};
+
+        ArrayList<String> itemList = new ArrayList<String>();
+        itemList.addAll(Arrays.asList(items));
+
+        listAdapter = new ArrayAdapter<String> (this, R.layout.history_row, itemList);
+        listAdapter.add("23.05.15 13:03");
+        lv.setAdapter(listAdapter);
+
     }
 
 
