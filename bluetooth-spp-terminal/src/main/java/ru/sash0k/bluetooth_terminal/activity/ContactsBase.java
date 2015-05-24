@@ -36,6 +36,7 @@ public class ContactsBase extends Activity {
         phoneModels = new ArrayList<PhoneModel>();
 
         listView = (ListView) findViewById(R.id.listJe);
+
         addContact = (Button) findViewById(R.id.addContact);
         addContact.setOnClickListener(new View.OnClickListener() {
             @Override
