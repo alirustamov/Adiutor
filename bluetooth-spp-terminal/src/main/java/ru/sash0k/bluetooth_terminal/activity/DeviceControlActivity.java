@@ -337,11 +337,11 @@ public final class DeviceControlActivity extends BaseActivity {
     void appendLog(String message, boolean hexMode, boolean outgoing, boolean clean) {
 
         StringBuilder msg = new StringBuilder();
-        if (show_timings) msg.append("[").append(timeformat.format(new Date())).append("]");
-        if (show_direction) {
+        /*if (show_timings) msg.append("[").append(timeformat.format(new Date())).append("]");*/
+        /*if (show_direction) {
             final String arrow = (outgoing ? " << " : " >> ");
             msg.append(arrow);
-        } else msg.append(" ");
+        } else msg.append(" ");*/
 
         msg.append(hexMode ? Utils.printHex(message) : message);
         if (outgoing) msg.append('\n');
