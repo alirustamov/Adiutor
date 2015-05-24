@@ -1,7 +1,5 @@
 package ru.sash0k.bluetooth_terminal.activity;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import ru.sash0k.bluetooth_terminal.R;
 
@@ -64,7 +64,7 @@ public class ContactListAdapter extends BaseAdapter{
         {
             holder.Phone.setVisibility(View.VISIBLE);
             holder.Phone.setText(phoneModels.get(position).getPhone());
-            holder.Name.setBackgroundColor(Color.WHITE);
+//            holder.Name.setBackgroundColor(Color.WHITE);
         }
         return convertView;
     }
